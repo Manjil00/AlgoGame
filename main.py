@@ -1,5 +1,12 @@
-from tkinter import *
+"""Importing useful modules/ Libraries"""
 
+from tkinter import *
+import pygame
+import random
+import math
+from pygame import mixer
+import os
+import time
 # from PIL import ImageTk, Image
 
 game = Tk()
@@ -13,29 +20,28 @@ bg = PhotoImage(file="Images/Loginbg.png")
 background = Label(game, image=bg).place(x=0, y=0)
 
 # adding user login bg
-login_bg = PhotoImage(file="Images/LoginFrameBG.png")
+login_bg = PhotoImage(file="Images/LoginLabelwithterms.png")
 loginframe = Label(game, image=login_bg, bd=0).place(x=761, y=49)
 
 # Adding Username Label
 userLabel_img = PhotoImage(file="Images/Userlabel.png")
-userLabel = Label(game, image=userLabel_img, bg="#000000").place(x=790.5, y=79.5)
+userLabel = Label(game, image=userLabel_img, bg="#000000").place(x=790.5, y=60)
 
 # Adding terms and condition check box and text
 
-Label(game, text="I accept and understand all terms and conditions ",
-            font=("Arial,8"),
-            bd=0,
-            bg="#FFFFFF").place(x=815, y=150)
 
-"""
-def start():
-     Importing   
-    import pygame
-    import random
-    import math
-    from pygame import mixer
-    import os
-    import time
+
+# Adding Start Button
+sLabel = PhotoImage(file="Images/StartButton.png")
+startLabel = Button(game, image=sLabel,
+                    bg="#000000",
+                    activebackground="#000000",
+                    relief=FLAT,
+                    bd=0,
+                    ).place(x=953, y=190)
+
+"""def start():
+
 
     #Loading Images
 
