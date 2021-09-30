@@ -131,7 +131,7 @@ def game_loop():
         pygame.display.update()
         clock.tick(60)
 
-    ### pygame quit
+    # pygame quit
 
 
 game_loop()
