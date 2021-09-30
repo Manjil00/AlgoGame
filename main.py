@@ -23,7 +23,8 @@ background = Label(game, image=bg).place(x=0, y=0)
 login_bg = PhotoImage(file="Images/LoginLabelwithTerms.png")
 loginframe = Label(game, image=login_bg, bd=0).place(x=761, y=49)
 
-userEntry=Entry(game,text="Enter Username",
+username=StringVar()
+userEntry=Entry(game,text="Username",
       font=("Arial,30"),
       bg="#000000",
       bd=0)
@@ -55,14 +56,10 @@ startLabel = Button(game, image=sLabel,
                     bd=0,
                     ).place(x=953, y=190)
 
-"""def start():
+def start():
 
 
-    #Loading Images
 
-    playercar = pygame.image.load("Redcar.png"))
-    enemycar = pygame.image.load(os.path.join("Images", "FireTruck.png"))
 
-"""
 
 mainloop()
