@@ -24,7 +24,7 @@ pygame.display.set_caption('Road Block')
 bg = pygame.image.load('images/road.png')
 carimg = pygame.image.load('images/1.png')
 
-# boundary
+#Boundary
 west_b = 100
 east_b = 700
 
