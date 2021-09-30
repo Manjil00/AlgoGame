@@ -13,14 +13,14 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 
 # window with size of 500 x 400 pixels
-wn_width = 500
-wn_height = 400
+wn_width = 1080
+wn_height = 1080
 wn = pygame.display.set_mode((wn_width, wn_height))
 pygame.display.set_caption('Road Block')
 
 # image
 bg = pygame.image.load('images/road.png')
-carimg = pygame.image.load('images/yellow.png')
+carimg = pygame.image.load('images/1.png')
 
 # boundary
 west_b = 157
@@ -125,13 +125,13 @@ def game_loop():
             if block.y + block.height > player.rect.y and block.y < player.rect.bottom:
                 crash()
 
-        ##       # Score
+        #Score
         score_board(block.dodged)
 
         pygame.display.update()
         clock.tick(60)
 
-    # pygame quit
+    #pygame.quit
 
 
 game_loop()
