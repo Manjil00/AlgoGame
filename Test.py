@@ -18,13 +18,13 @@ RED = (255, 0, 0)
 wn_width = 800
 wn_height = 600
 wn = pygame.display.set_mode((wn_width, wn_height))
-pygame.display.set_caption('Road Block')
+pygame.display.set_caption('  F1 Road Block')
 
 # image
 bg = pygame.image.load('images/road.png')
-carimg = pygame.image.load('images/1.png')
+carimg = pygame.image.load('images/F1.png')
 
-#Boundary
+#Boundaries
 west_b = 100
 east_b = 700
 
