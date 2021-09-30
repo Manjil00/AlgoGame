@@ -3,6 +3,8 @@ import time
 import random
 
 # Initiate pygame. Always needed
+import self as self
+
 pygame.init()
 
 # Clock
@@ -13,8 +15,8 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 
 # window with size of 500 x 400 pixels
-wn_width = 1080
-wn_height = 1080
+wn_width = 800
+wn_height = 600
 wn = pygame.display.set_mode((wn_width, wn_height))
 pygame.display.set_caption('Road Block')
 
@@ -23,8 +25,8 @@ bg = pygame.image.load('images/road.png')
 carimg = pygame.image.load('images/1.png')
 
 # boundary
-west_b = 157
-east_b = 359
+west_b = 100
+east_b = 700
 
 
 class Block:
@@ -69,6 +71,7 @@ class Player:
 
         self.rect.x = self.rect.x + self.speedx
 
+
         # check boundary (west)
         if self.rect.left < west_b:
             self.rect.left = west_b
@@ -86,7 +89,7 @@ def score_board(dodged):
 
 def crash():
     font = pygame.font.Font(None, 80)
-    text = font.render('You crashed!', True, BLACK)
+    text = font.render('YOU CRASHED!', True, BLACK)
     text_width = text.get_width()
     text_height = text.get_height()
     x = int(wn_width / 2 - text_width / 2)
