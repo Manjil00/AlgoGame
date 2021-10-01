@@ -26,9 +26,14 @@ bg = pygame.image.load('images/road.png')
 carimg = pygame.image.load('images/F1.png')
 
 #Boundaries
-west_b = 100
+west_b = 132
 east_b = 700
 
+
+# Database sqLite3
+
+conn.sqlite3.connect("Dodge.db")
+c=conn.cursor()
 
 class Block:
     def __init__(self, x, y, width, height):
@@ -100,7 +105,11 @@ def crash():
     time.sleep(2)
     game_loop()
 
-# Database SQLite3
+
+
+
+
+
 
 # def game function
 def game_loop():
