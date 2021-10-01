@@ -23,8 +23,8 @@ def front():
     front_frame = LabelFrame(game,).pack()
 
     # Adding login backgrounds
-    bg = PhotoImage(file="Images/Loginbg.png")
-    background = Label(front_frame, image=bg).place(x=0, y=0)
+    bg = PhotoImage(file="Images/boost.png")
+    background = Label(front_frame, image=bg).place(x=0,y=0)
 
     # adding user login bg
     login_bg = PhotoImage(file="Images/BlackLabelWterms.png")
@@ -41,8 +41,11 @@ def front():
     userLabel_img = PhotoImage(file="Images/Userlabel.png")
     userLabel = Label(front_frame, image=userLabel_img, bg="#000000").place(x=790.5, y=60)
 
+    # Adding pw Label
     passwordLabel_img=PhotoImage(file="Images/pwLabel.png")
     pwLabel=Label(front_frame,image=passwordLabel_img,bg="#000000").place(x=800,y=158)
+
+    # Adding
 
 
     # Adding terms and condition check box and text
