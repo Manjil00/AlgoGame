@@ -37,7 +37,7 @@ c=conn.cursor()
 
 #c.execute("""CREATE TABLE Dodge(
 #            Dodge int,)
-#         """)
+##         """)
 
 conn.execute("INSERT INTO Dodge VALUES ('dodge.get()')")
 conn.commit()
