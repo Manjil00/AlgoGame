@@ -18,18 +18,19 @@ game.resizable(False, False)
 
 
 def front():
-    global bg, login_bg, userLabel_img, sLabel, bg,passwordLabel_img, supLabel,sinLabel
+    global loginbg, black_bg, userLabel_img, sLabel, bg, passwordLabel_img, supLabel, sinLabel
 
-    front_frame = LabelFrame(game,).pack()
+    front_frame = LabelFrame(game).pack()
 
     # Adding login backgrounds
-    bg = PhotoImage(file="Images/boost.png")
-    background = Label(front_frame, image=bg).place(x=0,y=0)
+    loginbg = PhotoImage(file="Images/f1.png")
+    background = Label(front_frame, image=loginbg,bg="#000000").place(x=-134, y=-31)
 
     # adding user login bg
-    login_bg = PhotoImage(file="Images/BlackLabelWterms.png")
-    loginframe = Label(front_frame, image=login_bg, bd=0).place(x=761, y=49)
+    black_bg = PhotoImage(file="Images/BlackLabelWterms.png")
+    blackframe = Label(front_frame, image=black_bg, bd=0,).place(x=761, y=49)
 
+    # Adding Entry
     username = StringVar()
     userEntry = Entry(game, text="Username",
                       font=("Arial,30"),
@@ -42,10 +43,9 @@ def front():
     userLabel = Label(front_frame, image=userLabel_img, bg="#000000").place(x=790.5, y=60)
 
     # Adding pw Label
-    passwordLabel_img=PhotoImage(file="Images/pwLabel.png")
-    pwLabel=Label(front_frame,image=passwordLabel_img,bg="#000000").place(x=800,y=158)
+    passwordLabel_img = PhotoImage(file="Images/pwLabel.png")
+    pwLabel = Label(front_frame, image=passwordLabel_img, bg="#000000").place(x=800, y=158)
 
-    # Adding
 
 
     # Adding terms and condition check box and text
@@ -62,11 +62,11 @@ def front():
     # Adding Start Button
     supLabel = PhotoImage(file="Images/signup.png")
     SignupLabel = Button(front_frame, image=supLabel,
-                        bg="#000000",
-                        activebackground="#000000",
-                        relief=FLAT,
-                        bd=0,
-                        ).place(x=801, y=309)
+                         bg="#000000",
+                         activebackground="#000000",
+                         relief=FLAT,
+                         bd=0,
+                         ).place(x=801, y=309)
 
     sinLabel = PhotoImage(file="Images/signin.png")
     SigninLabel = Button(front_frame, image=sinLabel,
@@ -78,9 +78,13 @@ def front():
 
     # Adding SIGNIN page
 
+    def signup():
+        global signupbg
+        signup = LabelFrame(game).pack()
 
-
-
+        # adding signupbg
+        signupbg = PhotoImage(file="Images/F1R.png")
+        signupbackg = Label(signup, image=signupbg, relief=FLAT, bd=0).place(x=0, y=0)
     def start():
         # Initiate pygame. Always needed
 
