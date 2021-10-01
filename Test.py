@@ -4,7 +4,7 @@ import random
 import sqlite3
 
 # Initiate pygame. Always needed
-import self as self
+
 
 pygame.init()
 
@@ -19,7 +19,7 @@ RED = (255, 0, 0)
 wn_width = 800
 wn_height = 600
 wn = pygame.display.set_mode((wn_width, wn_height))
-pygame.display.set_caption('  F1 Road Block')
+pygame.display.set_caption('F1 Road Block')
 
 # image
 bg = pygame.image.load('images/road.png')
@@ -32,8 +32,20 @@ east_b = 700
 
 # Database sqLite3
 
-conn.sqlite3.connect("Dodge.db")
+conn=sqlite3.connect("Dodge.db")
 c=conn.cursor()
+
+#c.execute("""CREATE TABLE Dodge(
+#            Dodge int,)
+#         """)
+
+conn.execute("INSERT INTO Dodge VALUES ('dodge.get()')")
+conn.commit()
+conn.close()
+
+
+
+
 
 class Block:
     def __init__(self, x, y, width, height):
