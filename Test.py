@@ -25,27 +25,23 @@ pygame.display.set_caption('F1 Road Block')
 bg = pygame.image.load('images/road.png')
 carimg = pygame.image.load('images/F1.png')
 
-#Boundaries
+# Boundaries
 west_b = 132
 east_b = 700
 
-
 # Database sqLite3
+"""
+conn = sqlite3.connect("Dodge.db")
+c = conn.cursor()
 
-conn=sqlite3.connect("Dodge.db")
-c=conn.cursor()
-
-#c.execute("""CREATE TABLE Dodge(
-#            Dodge int,)
-##         """)
-
-conn.execute("INSERT INTO Dodge VALUES ('dodge.get()')")
-conn.commit()
-conn.close()
-
-
-
-
+c.execute(
+         CREATE TABLE IF NOT EXISTS block(
+             score_results int,
+       )
+)
+#conn.commit()
+#conn.close()
+"""
 
 class Block:
     def __init__(self, x, y, width, height):
@@ -89,7 +85,6 @@ class Player:
 
         self.rect.x = self.rect.x + self.speedx
 
-
         # check boundary (west)
         if self.rect.left < west_b:
             self.rect.left = west_b
@@ -100,12 +95,16 @@ class Player:
 
 # Functions
 def score_board(dodged):
+    global dodged_result
+
     font = pygame.font.Font(None, 25)
     text = font.render('Dodged: ' + str(dodged), True, BLACK)
+    dodged_result=dodged
     wn.blit(text, (0, 0))
 
 
 def crash():
+    global dodged_result
     font = pygame.font.Font(None, 80)
     text = font.render('YOU CRASHED!', True, BLACK)
     text_width = text.get_width()
@@ -115,16 +114,23 @@ def crash():
     wn.blit(text, (x, y))
     pygame.display.update()
     time.sleep(2)
-    game_loop()
 
+    conn = sqlite3.connect("Dodge.db")
+    c = conn.cursor()
+    c.execute(
+        "INSERT INTO block VALUES (:score_results)",
+        {
+            "score_results": dodged_result
+        },
+    )
 
-
-
-
+    conn.commit()
+    conn.close()
 
 
 # def game function
 def game_loop():
+
     block_width = 80
     block_height = 20
     block_x = random.randrange(west_b, east_b - block_width)
@@ -151,13 +157,13 @@ def game_loop():
             if block.y + block.height > player.rect.y and block.y < player.rect.bottom:
                 crash()
 
-        #Score
+        # Score
         score_board(block.dodged)
-
         pygame.display.update()
+
         clock.tick(60)
 
-    #pygame.quit
+    # pygame.quit
 
 
 game_loop()
