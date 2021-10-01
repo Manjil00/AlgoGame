@@ -1,6 +1,7 @@
 import pygame
 import time
 import random
+import sqlite3
 
 # Initiate pygame. Always needed
 import self as self
