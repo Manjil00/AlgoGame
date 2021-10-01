@@ -100,6 +100,7 @@ def crash():
     time.sleep(2)
     game_loop()
 
+# Database SQLite3
 
 # def game function
 def game_loop():
