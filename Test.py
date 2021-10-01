@@ -1,7 +1,10 @@
+from tkinter import messagebox
+
 import pygame
 import time
 import random
 import sqlite3
+import mixer
 
 # Initiate pygame. Always needed
 
@@ -24,6 +27,9 @@ pygame.display.set_caption('F1 Road Block')
 # image
 bg = pygame.image.load('images/road.png')
 carimg = pygame.image.load('images/F1.png')
+
+
+
 
 # Boundaries
 west_b = 132
@@ -156,6 +162,7 @@ def game_loop():
         if player.rect.right > block.x and player.rect.x < block.x + block.width:
             if block.y + block.height > player.rect.y and block.y < player.rect.bottom:
                 crash()
+                exit()
 
         # Score
         score_board(block.dodged)

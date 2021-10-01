@@ -11,24 +11,23 @@ import time
 # from PIL import ImageTk, Image
 
 game = Tk()
-game.title = "F1 Road Block"
+game.title = "F1 Road Block Launcher"
 game.iconbitmap = ""
-game.geometry("800x600")
+game.geometry("1280x720")
 game.resizable(False, False)
 
 
-
 def front():
-    global bg,login_bg,userLabel_img,sLabel
+    global bg, login_bg, userLabel_img, sLabel, bg,passwordLabel_img, supLabel,sinLabel
 
-    front_frame = LabelFrame(game,)
+    front_frame = LabelFrame(game,).pack()
 
     # Adding login backgrounds
     bg = PhotoImage(file="Images/Loginbg.png")
     background = Label(front_frame, image=bg).place(x=0, y=0)
 
     # adding user login bg
-    login_bg = PhotoImage(file="Images/LoginLabelwithTerms.png")
+    login_bg = PhotoImage(file="Images/BlackLabelWterms.png")
     loginframe = Label(front_frame, image=login_bg, bd=0).place(x=761, y=49)
 
     username = StringVar()
@@ -42,6 +41,10 @@ def front():
     userLabel_img = PhotoImage(file="Images/Userlabel.png")
     userLabel = Label(front_frame, image=userLabel_img, bg="#000000").place(x=790.5, y=60)
 
+    passwordLabel_img=PhotoImage(file="Images/pwLabel.png")
+    pwLabel=Label(front_frame,image=passwordLabel_img,bg="#000000").place(x=800,y=158)
+
+
     # Adding terms and condition check box and text
     checkB = StringVar()
     checkbutton_check = Checkbutton(front_frame, variable=checkB,
@@ -51,16 +54,30 @@ def front():
                                     activebackground="#000000",
                                     bd=0, )
     checkbutton_check.deselect()
-    checkbutton_check.place(x=802, y=143.38)
+    checkbutton_check.place(x=802, y=264)
 
     # Adding Start Button
-    sLabel = PhotoImage(file="Images/StartButton.png")
-    startLabel = Button(front_frame, image=sLabel,
+    supLabel = PhotoImage(file="Images/signup.png")
+    SignupLabel = Button(front_frame, image=supLabel,
                         bg="#000000",
                         activebackground="#000000",
                         relief=FLAT,
                         bd=0,
-                        ).place(x=953, y=190)
+                        ).place(x=801, y=309)
+
+    sinLabel = PhotoImage(file="Images/signin.png")
+    SigninLabel = Button(front_frame, image=sinLabel,
+                         bg="#000000",
+                         activebackground="#000000",
+                         relief=FLAT,
+                         bd=0,
+                         ).place(x=1007, y=309)
+
+    # Adding SIGNIN page
+
+
+
+
     def start():
         # Initiate pygame. Always needed
 
