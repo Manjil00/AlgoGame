@@ -24,29 +24,39 @@ def front():
 
     # Adding login backgrounds
     loginbg = PhotoImage(file="Images/f1.png")
-    background = Label(front_frame, image=loginbg,bg="#000000").place(x=-134, y=-31)
+    background = Label(front_frame, image=loginbg, bg="#000000").place(x=-134, y=-31)
 
     # adding user login bg
     black_bg = PhotoImage(file="Images/BlackLabelWterms.png")
-    blackframe = Label(front_frame, image=black_bg, bd=0,).place(x=761, y=49)
+    blackframe = Label(front_frame, image=black_bg, bd=0, ).place(x=761, y=49)
 
-    # Adding Entry
-    username = StringVar()
-    userEntry = Entry(game, text="Username",
-                      font=("Arial,30"),
-                      bg="#000000",
-                      bd=0)
-    userEntry.place(x=860, y=102)
+
 
     # Adding Username Label
     userLabel_img = PhotoImage(file="Images/Userlabel.png")
     userLabel = Label(front_frame, image=userLabel_img, bg="#000000").place(x=790.5, y=60)
 
+    # Adding Username Entry
+    usernameentry=StringVar()
+    usernameentry.set("Username")
+    userEntry = Entry(front_frame,
+                      text= usernameentry,
+                      font=("Arial,50"),
+                      bg="#C8D9DB",
+                      bd=0,relief=FLAT).place(x=874, y=77)
+
     # Adding pw Label
     passwordLabel_img = PhotoImage(file="Images/pwLabel.png")
     pwLabel = Label(front_frame, image=passwordLabel_img, bg="#000000").place(x=800, y=158)
 
-
+    #Password Entry
+    passwordentry=StringVar()
+    passwordentry.set("Password")
+    userEntry = Entry(front_frame,
+                      text=passwordentry,
+                      font=("Arial,50"),
+                      bg="#C8D9DB",
+                      bd=0, relief=FLAT).place(x=883, y=180)
 
     # Adding terms and condition check box and text
     checkB = StringVar()
@@ -55,7 +65,7 @@ def front():
                                     offvalue="OFF",
                                     bg="#000000",
                                     activebackground="#000000",
-                                    bd=0, )
+                                    bd=0,)
     checkbutton_check.deselect()
     checkbutton_check.place(x=802, y=264)
 
@@ -85,6 +95,7 @@ def front():
         # adding signupbg
         signupbg = PhotoImage(file="Images/F1R.png")
         signupbackg = Label(signup, image=signupbg, relief=FLAT, bd=0).place(x=0, y=0)
+
     def start():
         # Initiate pygame. Always needed
 
