@@ -26,7 +26,7 @@ pygame.display.set_caption('F1 Road Block')
 
 # image
 bg = pygame.image.load('images/road.png')
-carimg = pygame.image.load('images/F1.png')
+carimg = pygame.image.load('images/player.png')
 
 
 
