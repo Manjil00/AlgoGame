@@ -16,8 +16,11 @@ game.iconbitmap = ""
 game.geometry("1280x720")
 game.resizable(False, False)
 
+signup_frame = LabelFrame(game, ).place(x=0, y=0)
+
 
 def login():
+    global usernameentry
     global loginbg, black_bg, userLabel_img, sLabel, bg, passwordLabel_img, supLabel, sinLabel
 
     login_frame = LabelFrame(game).pack()
@@ -84,27 +87,41 @@ def login():
                          bd=0,
                          ).place(x=1007, y=309)
 
-
+    tnc_check = IntVar()
+    Checkbutton(
+        login_frame,
+        bg="#5A67A8",
+        bd=0,
+        width=1,
+        height=1,
+        activebackground="#000000",
+        variable=tnc_check,
+        onvalue=1,
+        offvalue=0,
+    ).place(x=802, y=264)
+    \
 # Adding SIGNIN page
 def signup():
     global signupbg, sgnup_userimg, sgnup_passwordimg, signup_blackframe, sgnup_emailimg, sgnup_Buttonimg
+    global usernameentry, sgnup_userentry
 
-    signup_frame = LabelFrame(game, ).pack()
+    signup_frame = LabelFrame(game, ).place(x=0, y=0)
 
     signupbg = PhotoImage(file="Images/rolexf1.png")
-    signupbackg = Label(signup, image=signupbg, relief=FLAT, bd=0).place(x=110, y=100)
+    signupbackg = Label(signup_frame, image=signupbg, relief=FLAT, bd=0)
+    signupbackg.place(x=-110, y=-100)
 
     # Adding blackframe
     signup_blackframe = PhotoImage(file="Images/Signup_Blackframe.png")
-    sup_blackframe = Label(signup, image=signup_blackframe, relief=FLAT, bd=0).place(x=682, y=50)
+    sup_blackframe = Label(signup_frame, image=signup_blackframe, relief=FLAT, bd=0).place(x=682, y=50)
 
     # Adding user Label and entry
     sgnup_userimg = PhotoImage(file="Images/user_entry.png")
-    sgnup_userLabel = Label(signup, image=sgnup_userimg, relief=FLAT, bd=0, ).place(x=717, y=85)
+    sgnup_userLabel = Label(signup_frame, image=sgnup_userimg, relief=FLAT, bd=0, ).place(x=717, y=85)
 
     sgnup_userentry = StringVar()
     sgnup_userentry.set("Username")
-    userEntry = Entry(signup,
+    userEntry = Entry(signup_frame,
                       text=sgnup_userentry,
                       font=("Arial,50"),
                       bg="#C8D9DB",
@@ -112,11 +129,11 @@ def signup():
 
     # Adding email Label and entry
     sgnup_emailimg = PhotoImage(file="Images/emailEntry.png")
-    sgnup_emailLabel = Label(signup, image=sgnup_emailimg, relief=FLAT, bd=0, ).place(x=717, y=196)
+    sgnup_emailLabel = Label(signup_frame, image=sgnup_emailimg, relief=FLAT, bd=0, ).place(x=717, y=196)
 
     sgnup_Emailentry = StringVar()
     sgnup_Emailentry.set("Email")
-    emailentry = Entry(signup,
+    emailentry = Entry(signup_frame,
                        text=sgnup_Emailentry,
                        font=("Arial,50"),
                        bg="#C8D9DB",
@@ -125,26 +142,51 @@ def signup():
 
     # Adding PW Label and entry
     sgnup_passwordimg = PhotoImage(file="Images/PWentry.png")
-    sgnup_passwordLabel = Label(signup, image=sgnup_passwordimg, relief=FLAT, bd=0).place(x=717, y=307)
+    sgnup_passwordLabel = Label(signup_frame, image=sgnup_passwordimg, relief=FLAT, bd=0).place(x=717, y=307)
 
     sgn_passwordentry = StringVar()
     sgn_passwordentry.set("Password")
-    passwordentry = Entry(signup,
+    passwordentry = Entry(signup_frame,
                           text=sgn_passwordentry,
                           font=("Arial,50"),
                           bg="#C8D9DB",
                           bd=0,
                           relief=FLAT).place(x=818, y=317)
 
-    # Adding Signup Button
+    def signupclick():
+        global usernameentry, sgnup_userentry
+        conn = sqlite3.connect("Dodge.db")
+        c = conn.cursor()
+        c.execute(
+            'INSERT INTO block VALUES(:username, :email, :password, :score_results)',
+            {
+                "username": sgnup_userentry.get(),
+                "email": sgnup_Emailentry.get(),
+                "password": sgn_passwordentry.get(),
+                "score_results": 0,
+            },
+
+        )
+        conn.commit()
+        conn.close()
+
+        usernameentry=sgnup_userentry
+
+
+        login()
+
+        # Adding Signup Button
+
     sgnup_Buttonimg = PhotoImage(file="Images/signupButton.png")
-    sgnup_Button = Button(signup,
+    sgnup_Button = Button(signup_frame,
                           image=sgnup_Buttonimg,
-                          relief=FLAT, bd=0, bg="#000000",
-                          activebackground="#000000").place(x=928, y=432)
+                          relief=FLAT, bd=0, bg="#000000", command=signupclick,
+                          activebackground="#000000")
+    sgnup_Button.place(x=928, y=432)
 
 
 def start():
+    global usernameentry
     # Initiate pygame
 
     pygame.init()
@@ -171,17 +213,20 @@ def start():
     east_b = 700
 
     # Database sqLite3
-    """
+
     conn = sqlite3.connect("Dodge.db")
     c = conn.cursor()
-
-    c.execute(
-             CREATE TABLE IF NOT EXISTS block(
-                 score_results int,
-           )
+    """
+        c.execute(
+         CREATE TABLE  block(
+                 username str,
+                 email str,
+                 password str,
+                 score_results int
+        )
     )
-    #conn.commit()
-    #conn.close()
+    conn.commit()
+    conn.close()
     """
 
     class Block:
@@ -242,7 +287,8 @@ def start():
         wn.blit(text, (0, 0))
 
     def crash():
-        global dodged_result
+        global dodged_result,usernameentry
+
         font = pygame.font.Font(None, 80)
         text = font.render('YOU CRASHED!', True, BLACK)
         text_width = text.get_width()
@@ -255,11 +301,28 @@ def start():
 
         conn = sqlite3.connect("Dodge.db")
         c = conn.cursor()
+        c.execute(f"""SELECT * FROM block WHERE :username={usernameentry}""")
+        d=c[0]
+        e=d[3]
+        if e<=dodged_result:
+            e=dodged_result
+        d_0=d[0]
+        d_1=d[1]
+        d_2=d[2]
+        d_3=e
+
+        conn.commit()
+        c.execute(f"""DELETE FROM block WHERE :username={usernameentry}""")
+        conn.commit()
         c.execute(
-            "INSERT INTO block VALUES (:score_results)",
+            'INSERT INTO block VALUES(:username, :email, :password, :score_results)',
             {
-                "score_results": dodged_result
+                "username":d_0,
+                "email": d_1,
+                "password": d_2,
+                "score_results":d_3,
             },
+
         )
 
         conn.commit()
