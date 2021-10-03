@@ -18,6 +18,7 @@ game.resizable(False, False)
 
 signup_frame = LabelFrame(game, ).place(x=0, y=0)
 login_frame = LabelFrame(game).place(x=0, y=0)
+start_game = LabelFrame(game).place(x=0, y=0)
 
 def login():
     global usernameentry
@@ -26,6 +27,7 @@ def login():
     login_frame = LabelFrame(game).place(x=0,y=0)
 
     def signinclick():
+
         L=LabelFrame(login_frame).place(x=0,y=0)
         valid1 = False
         valid2 = False
@@ -46,7 +48,7 @@ def login():
             l1= Label(login_frame, text="Wrong Credentials ", bg="#000000", fg="#FFFFFF").place(x=862, y=382)
 
         elif valid1 is True and valid2 is True:
-            print("Game started")
+            dashboard()
 
         elif valid1 is True and valid2 is False:
             l2=Label(login_frame, text="Please agree to Terms and Conditions", bg="#000000", fg="#FFFFFF").place(x=858, y=289)
@@ -215,6 +217,22 @@ def signup():
                           activebackground="#000000")
     sgnup_Button.place(x=928, y=432)
 
+def dashboard():
+    global startButton_img,f1
+    start_game = LabelFrame(game).place(x=0, y=0)
+
+    startbg_img = PhotoImage(file="Images/f1.png")
+    startbg = Label(game, image=startbg_img).place(x=0, y=0)
+
+    startButton_img = PhotoImage(file="Images/StartButton.png")
+    startButton = Button(game, image=startButton_img,
+                         bg="#F31714", fg="#000000",
+                         activebackground="#000000",
+                         relief=FLAT,
+                         bd=0,command=start
+                         )
+    startButton.place(x=600, y=100)
+
 
 def start():
     global usernameentry
@@ -237,7 +255,7 @@ def start():
 
     # image
     bg = pygame.image.load('images/road.png')
-    carimg = pygame.image.load('images/F1.png')
+    carimg = pygame.image.load('images/player.png')
 
     # Boundaries
     west_b = 132
