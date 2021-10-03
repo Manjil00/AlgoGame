@@ -59,6 +59,6 @@ passwordentry = Entry(signup,
 
 # Adding Signup Button
 sgnup_Buttonimg = PhotoImage(file="Images/signupButton.png")
-sgnup_Button = Button(signup, image=sgnup_Buttonimg, relief=FLAT, bd=0, ).place(x=928, y=432)
+sgnup_Button = Button(signup, image=sgnup_Buttonimg, relief=FLAT, bd=0,bg="#000000" ).place(x=928, y=432)
 
 mainloop()
