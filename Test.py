@@ -19,8 +19,8 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 
 # window with size of 500 x 400 pixels
-wn_width = 800
-wn_height = 600
+wn_width = 1280
+wn_height = 720
 wn = pygame.display.set_mode((wn_width, wn_height))
 pygame.display.set_caption('F1 Road Block')
 
