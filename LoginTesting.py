@@ -13,5 +13,5 @@ def test1(tester):
 
 
 def test_2(tester):
-    password_check = "Password123"
+    password_check = "Password12345"
     assert tester[1] == password_check

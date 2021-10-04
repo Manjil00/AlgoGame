@@ -15,7 +15,6 @@ game.title = "F1 Road Block Launcher"
 game.iconbitmap = ""
 game.geometry("1280x720")
 game.resizable(False, False)
-
 signup_frame = LabelFrame(game, ).place(x=0, y=0)
 login_frame = LabelFrame(game).place(x=0, y=0)
 start_game = LabelFrame(game).place(x=0, y=0)
