@@ -141,16 +141,16 @@ def signup():
     signup_frame = LabelFrame(game, ).place(x=0, y=0)
 
     signupbg = PhotoImage(file="Images/rolexf1.png")
-    signupbackg = Label(signup_frame, image=signupbg, relief=FLAT, bd=0)
+    signupbackg = Label(signup_frame, image=signupbg, relief=FLAT, bd=0,bg="#000000")
     signupbackg.place(x=-110, y=-100)
 
     # Adding blackframe
     signup_blackframe = PhotoImage(file="Images/Signup_Blackframe.png")
-    sup_blackframe = Label(signup_frame, image=signup_blackframe, relief=FLAT, bd=0).place(x=682, y=50)
+    sup_blackframe = Label(signup_frame, image=signup_blackframe, relief=FLAT, bd=0,bg="#000000").place(x=682, y=50)
 
     # Adding user Label and entry
     sgnup_userimg = PhotoImage(file="Images/user_entry.png")
-    sgnup_userLabel = Label(signup_frame, image=sgnup_userimg, relief=FLAT, bd=0, ).place(x=717, y=85)
+    sgnup_userLabel = Label(signup_frame, image=sgnup_userimg, relief=FLAT, bd=0,bg="#000000" ).place(x=717, y=85)
 
     sgnup_userentry = StringVar()
     sgnup_userentry.set("Username")
@@ -162,7 +162,7 @@ def signup():
 
     # Adding email Label and entry
     sgnup_emailimg = PhotoImage(file="Images/emailEntry.png")
-    sgnup_emailLabel = Label(signup_frame, image=sgnup_emailimg, relief=FLAT, bd=0, ).place(x=717, y=196)
+    sgnup_emailLabel = Label(signup_frame, image=sgnup_emailimg, relief=FLAT, bd=0,bg="#000000" ).place(x=717, y=196)
 
     sgnup_Emailentry = StringVar()
     sgnup_Emailentry.set("Email")
@@ -175,7 +175,7 @@ def signup():
 
     # Adding PW Label and entry
     sgnup_passwordimg = PhotoImage(file="Images/PWentry.png")
-    sgnup_passwordLabel = Label(signup_frame, image=sgnup_passwordimg, relief=FLAT, bd=0).place(x=717, y=307)
+    sgnup_passwordLabel = Label(signup_frame, image=sgnup_passwordimg, relief=FLAT, bd=0,bg="#000000").place(x=717, y=307)
 
     sgn_passwordentry = StringVar()
     sgn_passwordentry.set("Password")
