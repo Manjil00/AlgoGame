@@ -73,7 +73,7 @@ def login():
 
     # Adding Username Entry
     usernameentry = StringVar()
-
+    usernameentry.set("Username")
     userEntry = Entry(login_frame,
                       text=usernameentry,
                       font=("Arial,50"),
