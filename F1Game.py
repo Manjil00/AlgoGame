@@ -12,7 +12,6 @@ import time
 
 game = Tk()
 game.title = "F1 Road Block Launcher"
-game.iconbitmap = ""
 game.geometry("1280x720")
 game.resizable(False, False)
 signup_frame = LabelFrame(game, ).place(x=0, y=0)
