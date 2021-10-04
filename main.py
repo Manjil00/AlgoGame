@@ -20,15 +20,16 @@ signup_frame = LabelFrame(game, ).place(x=0, y=0)
 login_frame = LabelFrame(game).place(x=0, y=0)
 start_game = LabelFrame(game).place(x=0, y=0)
 
+
 def login():
     global usernameentry
-    global loginbg, black_bg, userLabel_img, sLabel, bg, passwordLabel_img, supLabel, sinLabel
+    global loginbg, black_bg, userLabel_img, sLabel, bg, passwordLabel_img, supLabel, sinLabel,usernameentry1
 
-    login_frame = LabelFrame(game).place(x=0,y=0)
+    login_frame = LabelFrame(game).place(x=0, y=0)
 
     def signinclick():
-
-        L=LabelFrame(login_frame).place(x=0,y=0)
+        global usernameentry1
+        L = LabelFrame(login_frame).place(x=0, y=0)
         valid1 = False
         valid2 = False
         conn = sqlite3.connect("Dodge.db")
@@ -37,7 +38,7 @@ def login():
         k = c.fetchall()
         h = len(k)
         for i in range(0, h):
-            g=k[i]
+            g = k[i]
             if g[0] == usernameentry.get() and g[2] == passwordentry.get():
                 valid1 = True
 
@@ -45,14 +46,18 @@ def login():
                 valid2 = True
 
         if valid1 is False and valid2 is True:
-            l1= Label(login_frame, text="Wrong Credentials ", bg="#000000", fg="#FFFFFF").place(x=862, y=382)
+            l1 = Label(login_frame, text="Wrong Credentials ", bg="#000000", fg="#FFFFFF").place(x=862, y=382)
+
+
+
+        elif valid1 is True and valid2 is False:
+            l2 = Label(login_frame, text="Please agree to Terms and Conditions", bg="#000000", fg="#FFFFFF").place(
+                x=858, y=289)
 
         elif valid1 is True and valid2 is True:
             dashboard()
-
-        elif valid1 is True and valid2 is False:
-            l2=Label(login_frame, text="Please agree to Terms and Conditions", bg="#000000", fg="#FFFFFF").place(x=858, y=289)
-
+            usernameentry1=usernameentry.get()
+            print(usernameentry1)
 
     # Adding login backgrounds
     loginbg = PhotoImage(file="Images/f1.png")
@@ -68,7 +73,7 @@ def login():
 
     # Adding Username Entry
     usernameentry = StringVar()
-    usernameentry.set("Username")
+
     userEntry = Entry(login_frame,
                       text=usernameentry,
                       font=("Arial,50"),
@@ -108,17 +113,13 @@ def login():
                          bd=0, command=signup,
                          ).place(x=801, y=309)
 
-
     sinLabel = PhotoImage(file="Images/signin.png")
     SigninLabel = Button(login_frame, image=sinLabel,
                          bg="#000000",
                          activebackground="#000000",
                          relief=FLAT,
-                         bd=0,command=signinclick,
+                         bd=0, command=signinclick,
                          ).place(x=1007, y=309)
-
-
-
 
     tnc_check = IntVar()
     Checkbutton(
@@ -204,7 +205,7 @@ def signup():
         conn.commit()
         conn.close()
 
-        usernameentry = sgnup_userentry
+
 
         login()
 
@@ -217,8 +218,9 @@ def signup():
                           activebackground="#000000")
     sgnup_Button.place(x=928, y=432)
 
+
 def dashboard():
-    global startButton_img,f1
+    global startButton_img, startbg_img
     start_game = LabelFrame(game).place(x=0, y=0)
 
     startbg_img = PhotoImage(file="Images/f1.png")
@@ -229,13 +231,13 @@ def dashboard():
                          bg="#F31714", fg="#000000",
                          activebackground="#000000",
                          relief=FLAT,
-                         bd=0,command=start
+                         bd=0, command=start
                          )
     startButton.place(x=600, y=100)
 
 
 def start():
-    global usernameentry
+    global usernameentry1
     # Initiate pygame
 
     pygame.init()
@@ -331,12 +333,20 @@ def start():
         global dodged_result
 
         font = pygame.font.Font(None, 25)
+
         text = font.render('Dodged: ' + str(dodged), True, BLACK)
+        conn = sqlite3.connect("Dodge.db")
+        c = conn.cursor()
+        c.execute(f"""SELECT * FROM block WHERE username='{usernameentry1}'""")
+        d = c.fetchall()
+        e = d[0]
+        text2 = font.render('High-Score: ' + str(e[3]), True, BLACK)
         dodged_result = dodged
         wn.blit(text, (0, 0))
+        wn.blit(text2, (0, 10))
 
     def crash():
-        global dodged_result, usernameentry
+        global dodged_result, usernameentry1
 
         font = pygame.font.Font(None, 80)
         text = font.render('YOU CRASHED!', True, BLACK)
@@ -350,18 +360,19 @@ def start():
 
         conn = sqlite3.connect("Dodge.db")
         c = conn.cursor()
-        c.execute(f"""SELECT * FROM block WHERE :username={usernameentry}""")
-        d = c[0]
-        e = d[3]
-        if e <= dodged_result:
+        c.execute(f"""SELECT * FROM block WHERE username='{usernameentry1}'""")
+        d=c.fetchall()
+        f = d[0]
+        e = f[3]
+        if e<= dodged_result:
             e = dodged_result
-        d_0 = d[0]
-        d_1 = d[1]
-        d_2 = d[2]
+        d_0 = f[0]
+        d_1 = f[1]
+        d_2 = f[2]
         d_3 = e
 
         conn.commit()
-        c.execute(f"""DELETE FROM block WHERE :username={usernameentry}""")
+        c.execute(f"""DELETE FROM block WHERE username='{usernameentry1}'""")
         conn.commit()
         c.execute(
             'INSERT INTO block VALUES(:username, :email, :password, :score_results)',
